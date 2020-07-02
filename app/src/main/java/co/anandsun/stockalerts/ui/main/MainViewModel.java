@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.view.View;
 
 import java.util.Calendar;
@@ -13,17 +14,16 @@ import co.anandsun.stockalerts.finance.api.FinanceService;
 
 public class MainViewModel extends ViewModel {
 
-    public void setupFinanceService(View v)
+    public void setupFinanceService(Context context)
     {
-        Intent myIntent = new Intent(v.getContext(), FinanceService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(v.getContext(),  0, myIntent, 0);
+        Intent myIntent = new Intent(context,FinanceService.class);
+        myIntent.putExtra("KEY_TRIGGER_TIME", "30*1000");
+        PendingIntent pendingIntent = PendingIntent.getService(context,  0, myIntent, 0);
 
-        AlarmManager alarmManager = (AlarmManager)v.getContext().getSystemService(Context.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, 60); // first time
-        long frequency= 5 ; // in ms
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), frequency, pendingIntent);
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + (5*1000), pendingIntent);
 
 
     }

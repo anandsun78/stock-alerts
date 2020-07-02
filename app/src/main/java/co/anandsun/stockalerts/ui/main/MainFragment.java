@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mViewModel.setupFinanceService(this.getView());
+        mViewModel.setupFinanceService(getContext());
     }
 
 }
