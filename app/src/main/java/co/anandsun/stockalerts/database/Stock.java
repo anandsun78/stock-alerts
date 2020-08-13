@@ -22,14 +22,21 @@ public class Stock {
     @ColumnInfo(name = "priceHigh")
     private double priceHigh;
 
-    public Stock(String symbol, int priceLow, int priceHigh)
+    public Stock(String symbol, double priceLow, double priceHigh)
     {
-
+        this.id = id;
         this.symbol = symbol;
         this.priceLow = priceLow;
         this.priceHigh = priceHigh;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getSymbol() {
         return symbol;
     }
