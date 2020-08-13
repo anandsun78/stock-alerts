@@ -11,11 +11,11 @@ import java.util.List;
 public interface StockDao {
 
     @Insert
-    void insertStock(Stock stock);
+    void insertStock(UserStock userStock);
 
     @Query("DELETE FROM tracked_stocks WHERE stockSymbol= :name")
     void deleteStock(String name);
 
     @Query("SELECT * FROM tracked_stocks")
-    LiveData<List<Stock>> getAllStocks();
+    LiveData<List<UserStock>> getAllStocks();
 }

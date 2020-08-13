@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tracked_stocks")
-public class Stock {
+public class UserStock {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "stockID")
@@ -22,7 +22,7 @@ public class Stock {
     @ColumnInfo(name = "priceHigh")
     private double priceHigh;
 
-    public Stock(String symbol, double priceLow, double priceHigh)
+    public UserStock(String symbol, double priceLow, double priceHigh)
     {
         this.id = id;
         this.symbol = symbol;

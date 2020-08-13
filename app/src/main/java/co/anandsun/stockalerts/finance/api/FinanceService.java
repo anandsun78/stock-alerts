@@ -83,7 +83,7 @@ public class FinanceService extends Service {
         try{
 
             String[] symbols = new String[] { "WKHS", "SHLL", "TSLA", "NKLA"};
-//            Map<String, Stock> stocks = YahooFinance.get(symbols);
+//            Map<String, UserStock> stocks = YahooFinance.get(symbols);
 
             String notificationText = "WKHS: " + YahooFinance.get("WKHS").getQuote().getPrice().toString();
             String title = "Your quotes are";

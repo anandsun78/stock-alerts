@@ -17,7 +17,7 @@ public class SendNotification {
     {
         notificationManager = (NotificationManager) v.getSystemService(Context.NOTIFICATION_SERVICE);
         createNotificationChannel("co.anandsun.stockalerts.finance.api.SendNotification","Notify Stocks",
-                "Send Stock Alerts every minute");
+                "Send UserStock Alerts every minute");
     }
 
     private void createNotificationChannel(String id, String name, String description)
