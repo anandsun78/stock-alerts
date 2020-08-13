@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -12,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import co.anandsun.stockalerts.R;
 import co.anandsun.stockalerts.database.UserStock;
 import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
 
 
 public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.ViewHolder> {
     private int stockItemLayout;
     private List<UserStock> userStockList;
-    private Stock stock;
 
     public StockListAdapter(int layoutId)
     {
@@ -42,7 +43,13 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
     public void onBindViewHolder(@NonNull StockListAdapter.ViewHolder holder, int position) {
 
         holder.stockSymbol.setText(userStockList.get(position).getSymbol());
-        holder.stockName.setText(stock.getSymbol());
+        try {
+            holder.stockName.setText(YahooFinance.get(userStockList.get(position).getSymbol()).getName());
+            holder.stockPrice.setText(YahooFinance.get(userStockList.get(position).getSymbol()).getQuote().getPrice().toString());
+            holder.stockPercent.setText(YahooFinance.get(userStockList.get(position).getSymbol()).getQuote().getChangeInPercent().toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
