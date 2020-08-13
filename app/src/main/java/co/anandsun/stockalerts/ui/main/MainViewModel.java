@@ -13,7 +13,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import co.anandsun.stockalerts.database.UserStock;
 import co.anandsun.stockalerts.database.StockRepository;
-import co.anandsun.stockalerts.finance.api.FinanceService;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -27,7 +26,10 @@ public class MainViewModel extends AndroidViewModel {
         allStocks = repository.getAllStocks();
     }
 
-
+    LiveData <List<UserStock>> getAllStocks()
+    {
+        return allStocks;
+    }
     public void insertStock(UserStock userStock)
     {
         repository.insertStock(userStock);
@@ -38,7 +40,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
-    public void setupFinanceService(Context context)
+  /*  public void setupFinanceService(Context context)
     {
         Intent myIntent = new Intent(context,FinanceService.class);
         myIntent.putExtra("KEY_TRIGGER_TIME", "30*1000");
@@ -50,6 +52,6 @@ public class MainViewModel extends AndroidViewModel {
                 SystemClock.elapsedRealtime() + (5*1000), pendingIntent);
 
 
-    }
+    }*/
 
 }

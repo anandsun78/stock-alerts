@@ -1,5 +1,6 @@
 package co.anandsun.stockalerts.ui.main;
 
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import co.anandsun.stockalerts.R;
+import co.anandsun.stockalerts.database.StockDao;
 import co.anandsun.stockalerts.database.UserStock;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
@@ -41,16 +43,14 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull StockListAdapter.ViewHolder holder, int position) {
-
-        holder.stockSymbol.setText(userStockList.get(position).getSymbol());
-        try {
-            holder.stockName.setText(YahooFinance.get(userStockList.get(position).getSymbol()).getName());
-            holder.stockPrice.setText(YahooFinance.get(userStockList.get(position).getSymbol()).getQuote().getPrice().toString());
-            holder.stockPercent.setText(YahooFinance.get(userStockList.get(position).getSymbol()).getQuote().getChangeInPercent().toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        UserStock stock = userStockList.get(position);
+        holder.stockSymbol.setText(stock.getSymbol());
+        holder.stockName.setText(stock.getStockName());
+        holder.stockPercent.setText(stock.getStockPercent());
+        holder.stockPrice.setText(String.valueOf(stock.getStockPrice()));
     }
+
+
 
     @Override
     public int getItemCount() {
