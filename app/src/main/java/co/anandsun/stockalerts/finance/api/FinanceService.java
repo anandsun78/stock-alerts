@@ -27,8 +27,7 @@ public class FinanceService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-       PendingIntent pendingIntent = PendingIntent.getService(getBaseContext(),  0, intent, 0);
-
+        PendingIntent pendingIntent = PendingIntent.getService(getBaseContext(),  0, intent, 0);
         AlarmManager alarmManager = (AlarmManager)getBaseContext().getSystemService(Context.ALARM_SERVICE);
 
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -36,6 +35,17 @@ public class FinanceService extends Service {
         AsyncTask task = new SrvClass().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,startId);
         return Service.START_STICKY;
 
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        Log.i("hello","In the service restart");
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartservice");
+        broadcastIntent.setClass(this, RestartService.class);
+        this.sendBroadcast(broadcastIntent);
     }
 
     @Nullable
