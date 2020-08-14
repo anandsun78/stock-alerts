@@ -39,15 +39,15 @@ public class UserStock {
     @ColumnInfo(name = "priceHigh")
     private double priceHigh;
 
-    public UserStock(String symbol, String stockNames, double priceLow, double priceHigh, double stockPrices, String stockPercents)
+    public UserStock(String symbol, String stockName, double priceLow, double priceHigh, double stockPrice, String stockPercent)
     {
         this.id = id;
         this.symbol = symbol;
-        this.stockName = stockNames;
+        this.stockName = stockName;
         this.priceLow = priceLow;
         this.priceHigh = priceHigh;
-        this.stockPrice = stockPrices;
-        this.stockPercent = stockPercents;
+        this.stockPrice = stockPrice;
+        this.stockPercent = stockPercent;
     }
 
     public int getId() {

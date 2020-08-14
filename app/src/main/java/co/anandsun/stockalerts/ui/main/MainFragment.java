@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-       // mViewModel.setupFinanceService(getContext());
+        mViewModel.setupFinanceService(getContext());
         stockSymbol = getView().findViewById(R.id.stockSymbol);
         priceLow = getView().findViewById(R.id.priceLow);
         priceHigh= getView().findViewById(R.id.priceHigh);
@@ -84,9 +84,14 @@ public class MainFragment extends Fragment {
 
                 if(!symbol.equals("")  && !(userPriceHigh ==0)&& !(userPriceLow ==0))
                 {
-                    RetrieveStockPrice stockPrice = new RetrieveStockPrice(symbol,userPriceLow,userPriceHigh,mViewModel);
-                    stockPrice.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,symbol);
-                    clearFields();
+                    try {
+                        RetrieveStockPrice stockPrice = new RetrieveStockPrice(symbol, userPriceLow, userPriceHigh,mViewModel,getView());
+                        stockPrice.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, symbol);
+                        clearFields();
+                    }catch(Exception e)
+                    {
+
+                    }
                 }
                 else{
                     stockSymbol.setText("Incomplete Information");

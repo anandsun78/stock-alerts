@@ -21,15 +21,14 @@ import java.util.Map;
 import androidx.annotation.Nullable;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
-/*
+
 public class FinanceService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
        PendingIntent pendingIntent = PendingIntent.getService(getBaseContext(),  0, intent, 0);
-        return Service.START_STICKY;
-/*
+
         AlarmManager alarmManager = (AlarmManager)getBaseContext().getSystemService(Context.ALARM_SERVICE);
 
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -79,7 +78,7 @@ public class FinanceService extends Service {
 
     }
 
-  /*  public void myMethod()
+    /*public void myMethod()
     {
         try{
 
@@ -97,11 +96,10 @@ public class FinanceService extends Service {
             e.printStackTrace();
         }
     }
-
+*/
     public int createID(){
         Date now = new Date();
         int id = Integer.parseInt(new SimpleDateFormat("ddHHmmss",  Locale.US).format(now));
         return id;
     }
 }
-*/
